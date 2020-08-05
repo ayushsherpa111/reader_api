@@ -7,13 +7,7 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY src /usr/app/src
-
-# expose a container port
-EXPOSE 5000 
-
-ENV FLASK_APP=src/app.py
-ENV FLASK_ENV=development
+COPY app /usr/app
 
 # start the server
-CMD flask run 
+CMD flask run -h 0.0.0.0 

@@ -123,6 +123,7 @@ env.bak/
 venv.bak/
 manga_reader/
 docker/
+assets/
 
 # Spyder project settings
 .spyderproject
