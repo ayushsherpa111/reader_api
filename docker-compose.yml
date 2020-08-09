@@ -1,0 +1,28 @@
+version: "3.7"
+services: 
+    db:
+        container_name: flask_database 
+        image: postgres
+        environment: 
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: titan 
+        volumes: 
+            - ./docker/init/db.sh:/docker-entrypoint-initdb.d/initdb.sh
+            - ./docker/pgdata:/var/lib/postgresql/data 
+        ports:
+            - "8000:5432"
+        restart: always
+    
+    manga_api:
+        container_name: flask_api
+        build: .
+        volumes: 
+            - ./app:/app
+        depends_on: 
+            - "db"
+        ports:
+            - "5000:5000"
+        environment: 
+            DB_URL: postgres://root:root@postgres:8000/titan
+        command: flask run -h 0.0.0.0
