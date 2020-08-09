@@ -1,6 +1,6 @@
 """ The route related to all Chapters for the Manage """
 from flask_restful import Resource
-from src.models.manga import db, Manga
+from src.models.manga import Manga, db
 
 
 class Chapter(Resource):

@@ -1,13 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from src import db
 
 
 class Manga(db.Model):
     __tablename__ = "manga"
     chapter_id = db.Column(db.Integer, primary_key=True)
     chapter_count = db.Column(db.Integer, nullable=False)
-    images = db.relationship("images", backref="chapters")
+    images = db.relationship("Images", backref="chapters", lazy=True)
 
     def __init__(self, chapter_count):
         self.chapter_count = chapter_count
